@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}Generation {{ gen }}{% endblock %}
+
+{% block main %}
+
+{% if gen == 0 %}
+    <h1 style="text-align: center">All Pokémon Tier List</h1>
+{% else %}
+    <h1 style="text-align: center">Gen {{ gen }} Pokémon Tier List</h1>
+{% endif %}
+
+<div class="container">
+    <!-- Tier list -->
+    <div class="tier-list">
+        <div class="tier" id="tier-5">
+            <div class="tier-title">⭐⭐⭐⭐⭐</div>
+            <div class="tier-content" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+
+        <div class="tier" id="tier-4">
+            <div class="tier-title">⭐⭐⭐⭐</div>
+            <div class="tier-content" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+
+        <div class="tier" id="tier-3">
+            <div class="tier-title">⭐⭐⭐</div>
+            <div class="tier-content" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+
+        <div class="tier" id="tier-2">
+            <div class="tier-title">⭐⭐</div>
+            <div class="tier-content" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+
+        <div class="tier" id="tier-1">
+            <div class="tier-title">⭐</div>
+            <div class="tier-content" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+        </div>
+    </div>
+
+    <!-- side panel -->
+    <div id="control-panel">
+        <h2 id="current-name"></h2>
+        <img id="current-image" src="" width="100" />
+        <h3 id="current-position">0/0</h3>
+
+        <div id="buttons" class="tier_buttons">
+            <button class="rank_button" data-tier="5">5⭐</button>
+            <button class="rank_button" data-tier="4">4⭐</button>
+            <button class="rank_button" data-tier="3">3⭐</button>
+            <button class="rank_button" data-tier="2">2⭐</button>
+            <button class="rank_button" data-tier="1">1⭐</button>
+            <button id="reset-list" class="reset_button">Reset</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Pass generation number into JavaScript easily
+    const CURRENT_GENERATION = {{ gen|tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

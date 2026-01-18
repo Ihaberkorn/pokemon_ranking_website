@@ -1,0 +1,252 @@
+/* ...existing code... */
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start; /* keep control panel from stretching vertically */
+  padding: 16px;
+}
+
+.tier-list {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* each tier is a compact card with a small title area and a content area */
+.tier {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 8px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 120px; /* adjust to taste */
+}
+
+.tier-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-radius: 6px;
+}
+
+.tier-content {
+  padding: 6px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap; /* images/cards flow underneath the title */
+  align-items: flex-start;
+}
+
+
+/* control panel stays compact and has rounded corners */
+#control-panel {
+  flex: 1;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  align-self: flex-start; /* important: prevent full-height stretching */
+  max-width: 260px; /* fixed-ish width */
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* nicer image in control panel */
+#current-image {
+  border-radius: 8px;
+  display: block;
+  margin: 8px auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* small placeholder style for cards placed in tier-content */
+.tier .placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 12px;
+}
+
+.tier_buttons {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.rank_button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #fffca8;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.rank_button:hover {
+  background: #f9f577;
+  transform: scale(1.05);
+}
+
+
+/* Make placeholder ignore pointer events so it doesn't capture dragover */
+.drop-placeholder {
+  width: 50px;
+  height: 50px;
+  border: 2px dashed #888;
+  border-radius: 8px;
+  margin: 4px;
+  background: rgba(200, 200, 200, 0.15);
+  box-sizing: border-box;
+  pointer-events: none; /* IMPORTANT: prevents jitter when placeholder is under cursor */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-wrapper.dragging {
+  opacity: 0.5;       /* slightly transparent while dragging */
+  transform: scale(1.05); /* optional: tiny grow effect */
+  z-index: 10;        /* keep it above others */
+  /* REMOVE position: absolute and pointer-events: none */
+}
+
+
+
+/* ensure wrappers have predictable sizing */
+.pokemon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.pokemon-rank-badge {
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+
+  background: transparent;
+  color: black;
+  padding: 2px 4px;
+  font-size: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* Navbar ------------------------------------------------------ */
+nav {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  background: #e0e0e0;               /* softer than flat gray */
+  border-bottom: 2px solid #ccc;      /* subtle separation */
+  position: static;                   /* optional: sticks to top */
+  top: 0;
+  z-index: 100;
+}
+
+nav img {
+  height: 38px;
+}
+
+nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;              /* removes link style */
+  font-weight: 600;
+  font-size: 15px;
+  color: #222;
+
+  padding: 6px 10px;                  /* gives click area */
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav a:hover {
+  background: #b3b3b3;                /* soft hover */
+  color: #000;
+}
+
+nav a:active {
+  transform: scale(0.96);
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+  margin: 10px;
+}
+
+nav li {
+  cursor: pointer;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #222;
+  background: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6,
+nav, .tier-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.nav-logo {
+  height: 52px;       /* nice size: visible but not ridiculous */
+  margin-right: 20px; /* gives breathing room from links */
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 260px;
+    margin: 0 auto;
+}
+
+.auth-form input {
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.auth-form button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}

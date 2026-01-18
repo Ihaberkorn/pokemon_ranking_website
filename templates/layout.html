@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Google Fonts: Montserrat (headers) + Inter (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='International_Pokémon_logo.svg.png') }}" alt="Pokemon Logo" class="nav-logo">
+        </a>
+
+        <ul class="navbar-nav me-auto mt-2">
+            <li class="nav-item"><a href="/gen/1">Gen 1</a></li>
+            <li class="nav-item"><a href="/gen/2">Gen 2</a></li>
+            <li class="nav-item"><a href="/gen/3">Gen 3</a></li>
+            <li class="nav-item"><a href="/gen/4">Gen 4</a></li>
+            <li class="nav-item"><a href="/gen/5">Gen 5</a></li>
+            <li class="nav-item"><a href="/gen/6">Gen 6</a></li>
+            <li class="nav-item"><a href="/gen/7">Gen 7</a></li>
+            <li class="nav-item"><a href="/gen/8">Gen 8</a></li>
+            <li class="nav-item"><a href="/gen/9">Gen 9</a></li>
+            <li class="nav-item"><a href="/gen/0">All Pokemon</a></li>
+        </ul>
+
+    </nav>
+    {% block main %}{% endblock %}
+</body>
+<script>
+    const USER_LOGGED_IN = {{ 'true' if session.get('user_id') else 'false' }};
+</script>
+</html>
